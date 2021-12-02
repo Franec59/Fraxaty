@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche Création Patient</title>
+</head>
+
+<body>
+    <h1>Formulaire admition patient</h1>
+    <div>
+        <h3>Information général</h3>
+        <form action="creation_patient.html">
+            <div>
+                <label for="nom">Nom de famille: <input type="text" name="nom" id="nom" required></label>
+            </div>
+            <div>
+                <label for="prenom">Prénom: <input type="text" name="prenom" id="prenom" required></label>
+            </div>
+            <div>
+                <label for="naissance">Date de naissance: <input type="date" name="naissance" id="naissance" required></label>
+            </div>
+            <div>
+                <label for="sexe">Genre: <input type="text" name="sexe" id="sexe"required></label>
+            </div>
+            <div>
+                <label for="numero">Numéro de voierie: <input type="number" name="numero" id="numero"required></label>
+            </div>
+            <div>
+                <label for="rue">Nom del a rue: <input type="text" name="rue" id="rue"required></label>
+            </div>
+            <div>
+                <label for="cp">Code Postal: <input type="number" name="cp" id="cp" required></label>
+            </div>
+            <div>
+                <label for="ville">Ville: <input type="text" name="ville" id="ville" required></label>
+            </div>
+            <h3>Information médical</h3>
+            <div>
+                <label for="securite_sociale">Numéro de sécurité sociale: <input type="number" name="securite_sociale" id="securite_sociale" required></label>
+            </div>
+            <div>
+                <label for="infirmier">Infirmirer: <input type="text" name="infirmier_idinfirmier" id="infirmier" required></label>
+            </div>
+            <div>
+                <input type="button" value="Envoyer">
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
