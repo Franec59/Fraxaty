@@ -78,3 +78,5 @@ class DB ():
         except ValueError as err :
             print("Avertissement : "+ err)
             
+            
+            
