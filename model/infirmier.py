@@ -1,7 +1,7 @@
 from db import DB
 from adresse import Adresse
 
-class Infimier(DB):
+class Infirmier(DB):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
     
