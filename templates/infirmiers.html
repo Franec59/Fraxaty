@@ -1,1 +1,33 @@
 {% extends "base.html" %}
+
+
+<div class="card-body">
+    <table id="datatablesSimple">
+        <thead>
+            <tr>
+                <th>Id_Infirmier</th>
+                <th>adresse_idadresse</th>
+                <th>Numero_pro</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>tel_pro</th>
+                <th>tel_perso</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for value in data %}
+            <tr>
+                <td>{{value.Id_Infirmier}}</td>
+                <td>{{value.adresse_idadresse}}</td>
+                <td>{{value.Numero_pro}}</td>
+                <td>{{value.nom}}</td>
+                <td>{{value.prenom}}</td>
+                <td>{{value.tel_pro}}</td>
+                <td>{{value.tel_perso}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>

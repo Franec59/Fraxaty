@@ -1,5 +1,6 @@
-from db import DB
-from adresse import Adresse
+from model.db import DB
+from model.adresse import Adresse
+
 
 class Infirmier(DB):
     def __init__(self, **kwargs):
