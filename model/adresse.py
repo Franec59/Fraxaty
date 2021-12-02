@@ -1,4 +1,4 @@
-from db import  DB
+from model.db import  DB
 
 class Adresse(DB):
     def __init__(self, **kwargs):

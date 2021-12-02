@@ -1,11 +1,9 @@
-from flask import Flask
-from flask.templating import render_template, request
-from werkzeug.utils import redirect
+from flask import Flask, render_template, request
 from controller.infirmiersController import InfirmiersController
-from model.infirmier import Infimier
+from model.infirmier import Infirmier
 
 
-infirmier = Infimier()
+infirmier = Infirmier()
 infirmiersController = InfirmiersController()
 
 app = Flask(__name__)
