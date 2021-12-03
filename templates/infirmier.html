@@ -172,7 +172,7 @@
 
                 {% if context == "detail" %}
 				<div class="text-right">
-					<button type="button" id="cancel" name="cancel" class="btn btn-danger">Supprimer</button>
+					<a href="/infirmier/delete/{{infirmier_data.idinfirmier}}" class="btn btn-danger" role="button">Supprimer</a>
 					<a href="/infirmier/update/{{infirmier_data.idinfirmier}}" class="btn btn-secondary" role="button">Modifier</a>
 				</div>
                 {% endif %}                

@@ -18,7 +18,12 @@ class InfirmiersController():
         if context == "creation" :
             infirmier_id = InfirmierRepo().add(data)
             
-        elif context == "update" :
+        if context == "update" :
             infirmier_id = InfirmierRepo().update(data)
+            
+        if context == "delete" :
+            print("Here")
+            InfirmierRepo().delete(data)
+            return redirect(f'/infirmiers')
             
         return redirect(f'/infirmier/detail/{infirmier_id}')

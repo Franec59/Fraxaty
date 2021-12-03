@@ -2,9 +2,7 @@ from flask import Flask, render_template, request, abort
 from controller.infirmiersController import *
 
 
-
 app = Flask(__name__)
-
 
 
 @app.route("/")
@@ -20,19 +18,20 @@ def infirmiers():
 def creationInfirmier():
     return InfirmiersController.infirmier("creation")
 
-
 @app.route("/infirmier/<context>/<int:id>", methods=['POST', 'GET'])
 def actionInfirmier(context, id):
     if context in ["detail", "update", "delete"] :
-        return InfirmiersController.infirmier( context, id)
+        if context == "delete" :
+            return InfirmiersController.traitement(context, id)
+        
+        return InfirmiersController.infirmier(context, id)
     else:
         abort(404)
 
 @app.route("/infirmier/traitement/<context>", methods=['POST', 'GET'])
-def traitementInfirmier(context):
+def traitementInfirmier(context, id=None):
     data = request.form
-    infirmier_id = request.args.get('id')
-    return InfirmiersController.traitement(context, data)
+    return InfirmiersController.traitement(context, data, id=None)
 
 
 
