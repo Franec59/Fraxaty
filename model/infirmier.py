@@ -14,6 +14,7 @@ class Infirmier(DB):
         return rows
 
     def add(self, infirmier_data):
+        infirmier_data = infirmier_data.to_dict()
         adresse=Adresse()
         adresse_idadresse=adresse.add(infirmier_data)
         infirmier_data["adresse_idadresse"]=adresse_idadresse
@@ -40,12 +41,14 @@ class Infirmier(DB):
         cursor.execute(sql)
         cursor.close()
         return cursor.lastrowid
+   
     
     def update(self, infirmier_data, id_infirmier):
+        infirmier_data = infirmier_data.to_dict()
         adresse=Adresse()
         adresse_idadresse=adresse.add(infirmier_data)
         infirmier_data["adresse_idadresse"]=adresse_idadresse
-        infirmier_data["id"]=id_infirmier
+        infirmier_data["idinfirmier"]=id_infirmier
         cursor=self.getCursor()
         sql2=("""
                 UPDATE 
@@ -59,12 +62,15 @@ class Infirmier(DB):
                     tel_perso = "{tel_perso}"
                 
                 WHERE 
-                    {id}=idinfirmier
+                    idinfirmier="{idinfirmier}"
                     
                 ;
         """).format(**infirmier_data)
+        print(sql2)
         cursor.execute(sql2)
         cursor.close()
+        return cursor.lastrowid
+    
 
     def delete(self, id_infirmier):
         cursor=self.getCursor()
@@ -78,6 +84,7 @@ class Infirmier(DB):
         cursor=self.getCursor()
         sql4=(f"""
                 SELECT
+                    idinfirmier,
                     nom,
                     prenom,
                     numero_pro,

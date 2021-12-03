@@ -1,47 +1,40 @@
 from flask import Flask, render_template, request
-from controller.infirmiersController import InfirmiersController
-from model.infirmier import Infirmier
+from controller.infirmiersController import *
 
 
-infirmier = Infirmier()
-infirmiersController = InfirmiersController()
 
 app = Flask(__name__)
 
 
-@app.route("/infirmiers")
+
+@app.route("/")
+def dashboard():
+    return render_template('dashboard.html')
+
+
+@app.route("/infirmiers", methods=['POST', 'GET'])
 def infirmiers():
-    return render_template("infirmiers.html")
+    return InfirmiersController.infirmiers()
 
-@app.route("/infirmiers")
-def affichage():
-    return infirmiersController.fetchInfirmiers(infirmier)
+@app.route("/infirmier/creation", methods=['POST', 'GET'])
+def creationInfirmier():
+    return InfirmiersController.infirmier("creation")
 
-@app.route('/deleteInfirmier/<int:id>')
-def deleteInfirmier(id_infirmier):
-    return infirmiersController.delete(infirmier, id_infirmier)
 
-@app.route('/addInfirmier')
-def addInfirmier():
-    return infirmiersController.add()
+@app.route("/infirmier/detail/<int:id>", methods=['POST', 'GET'])
+def detailInfirmier(id):
+    return InfirmiersController.infirmier( "detail", id)
 
-@app.route('/traitementInfirmier', methods=['POST','GET'])
-def traitementInfirmier():
+
+@app.route("/infirmier/update/<int:id>", methods=['POST', 'GET'])
+def updateInfirmier(id):
+    return InfirmiersController.infirmier("update", id)
+
+
+@app.route("/infirmier/traitement/<context>", methods=['POST', 'GET'])
+def traitementInfirmier(context):
     data = request.form
-    return infirmiersController.traitementInfirmier(infirmier, data)
-
-@app.route('/updateInfirmier')
-def updateInfirmier():
-    data = request.args
-    return infirmiersController.update(data)
-    
-@app.route('/traitementUpdateInfirmier', methods=['POST','GET'])
-def traitementUpdateInfirmier():
-    data = request.form
-    return infirmiersController.traitementUpdateInfirmier(infirmier, data)
+    return InfirmiersController.traitement(context, data)
 
 
 
-
-
-# app.run()

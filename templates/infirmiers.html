@@ -1,33 +1,49 @@
 {% extends "base.html" %}
 
 
-<div class="card-body">
-    <table id="datatablesSimple">
-        <thead>
-            <tr>
-                <th>Id_Infirmier</th>
-                <th>adresse_idadresse</th>
-                <th>Numero_pro</th>
-                <th>nom</th>
-                <th>prenom</th>
-                <th>tel_pro</th>
-                <th>tel_perso</th>
-            </tr>
-        </thead>
+{% block main %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Liste des Infirmiers</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">{{ page_title }}</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                Veuillez cliquer sur un infirmier pour voir sa fiche détaillée
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Liste des Infirmiers
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Numéro Pro</th>
+                            <th>Tel Pro</th>
+                            <th>Tel Perso</th>
+                        </tr>
+                    </thead>
 
-        <tbody>
-            {% for value in data %}
-            <tr>
-                <td>{{value.Id_Infirmier}}</td>
-                <td>{{value.adresse_idadresse}}</td>
-                <td>{{value.Numero_pro}}</td>
-                <td>{{value.nom}}</td>
-                <td>{{value.prenom}}</td>
-                <td>{{value.tel_pro}}</td>
-                <td>{{value.tel_perso}}</td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-    </table>
-</div>
+                    <tbody>
+                        {% for infirmier in liste_infirmiers %}
+                        {% set url = url_for('detailInfirmier', id = infirmier.idinfirmier) %}  
+                        <tr style="cursor: pointer;" onclick="document.location = '{{ url }}'">  
+                            <td>{{ infirmier.nom }}</td> 
+                            <td>{{ infirmier.prenom }}</td> 
+                            <td>{{ infirmier.numero_pro }}</td> 
+                            <td>{{ infirmier.tel_pro }}</td> 
+                            <td>{{ infirmier.tel_perso }}</td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock main %}
