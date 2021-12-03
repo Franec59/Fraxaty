@@ -3,20 +3,20 @@
 
 {% block main %}
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Liste des Infirmiers</h1>
+        <h1 class="mt-4">Liste des Patients</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-            <li class="breadcrumb-item active">Infirmiers</li>
+            <li class="breadcrumb-item active">Patients</li>
         </ol>
         <div class="card mb-4">
             <div class="card-body">
-                <a href="/infirmier/creation" class="btn btn-success" role="button">Créer un infirmier</a>
+                <a href="/patient/creation" class="btn btn-success" role="button">Créer un patient</a>
             </div>
         </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Liste des Infirmiers
+                Liste des Patients
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -24,31 +24,26 @@
                         <tr>
                             <th>Nom</th>
                             <th>Prénom</th>
-                            <th>Numéro Pro</th>
-                            <th>Tel Pro</th>
-                            <th>Tel Perso</th>
+                            <th>Sexe</th>
+                            <th>Date de Naissance</th>
+                            <th>N° Sécu</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {% for infirmier in liste_infirmiers %}
-                        {% set url = url_for('actionInfirmier', context="detail", id=infirmier.idinfirmier) %}  
+                        {% for patient in liste_patients %}
+                        {% set url = url_for('actionPatient', context="detail", id=patient.idpatient) %}  
                         <tr style="cursor: pointer;" onclick="document.location = '{{ url }}'">  
-                            <td>{{ infirmier.nom }}</td> 
-                            <td>{{ infirmier.prenom }}</td> 
-                            <td>{{ infirmier.numero_pro }}</td> 
-                            <td>{{ infirmier.tel_pro }}</td> 
-                            <td>{{ infirmier.tel_perso }}</td> 
+                            <td>{{ patient.nom }}</td> 
+                            <td>{{ patient.prenom }}</td> 
+                            <td>{{ patient.sexe }}</td> 
+                            <td>{{ patient.naissance }}</td> 
+                            <td>{{ patient.securite_sociale }}</td> 
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <div class="text-right">
-            <a href="/infirmier/creation" class="btn btn-primary" role="button">Ajouter un infirmier</a>
-    </div>
-
     </div>
 {% endblock main %}
