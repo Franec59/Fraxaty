@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super ()}}
+
+<style>
+
+{% if context == "detail" %}
+
+.card-body input {
+    border : none;
+    text-transform: uppercase;
+    pointer-events:none;
+    font-weight:bold;
+    font-size:1.2em;
+}
+
+{% endif %}
+
+</style>
+
+
+{% endblock styles %}
+
+{% block main %}
+
+
+<div class="container-fluid px-4">
+{% if context == "detail" %}
+<h1 class="mt-4">Détail Infirmier #{{infirmier_data.numero_pro}}</h1>
+{% endif %}
+{% if context == "update" %}
+<h1 class="mt-4">Mise à jour Infirmier</h1>
+{% endif %}
+{% if context == "creation" %}
+<h1 class="mt-4">Création infirmier</h1>
+{% endif %}
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="/infirmiers">Infirmiers</a></li>
+    <li class="breadcrumb-item active">Détail infirmier</li>
+</ol>
+
+<div class="row gutters">
+<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+<div class="card h-100">
+	<div class="card-body">
+		<div class="account-settings">
+
+            {% if context == "detail" %}
+			<div class="user-profile">
+				<div class="user-avatar">
+					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+				</div>
+				<!-- <h5 class="user-name">Yuki Hayashi</h5>
+				<h6 class="user-email">yuki@Maxwell.com</h6> -->
+			</div>
+			<div class="about">
+				<h5>Notes</h5>
+				<p>Master en Biologie</p>
+			</div>
+            {% endif %}
+
+            {% if context == "creation" %}
+			<div class="about">
+				<h5>Création Infirmier</h5>
+				<p>Veuillez saisir les informations concernant l'infirmier</p>
+			</div>
+            {% endif %}
+
+		</div>
+	</div>
+</div>
+</div>
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+<div class="card h-100">
+	<div class="card-body">
+
+        {% if context == "creation" or context == "update" %}
+        <form action="/infirmier/traitement/{{context}}" method="POST">
+        {% endif %}
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h6 class="mt-3 mb-2 text-primary">Informations personnelles</h6>
+            </div>
+            {% if context == "update" %}
+                <input type="hidden" name="idinfirmier" value="{{infirmier_data.idinfirmier}}">
+            {% endif %}
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="nom">Nom de famille:</label>
+                    <input class="form-control" type="text" value="{{infirmier_data.nom}}"  id="nom" name="nom" placeholder="Saisir le nom de famille" required>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="prenom">Prénom:</label>
+                    <input class="form-control" value="{{infirmier_data.prenom}}"  type="text"  id="prenom" name="prenom" required>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                    <label for="tel_perso">Téléphone personnel:</label>
+                    <input class="form-control" value="{{infirmier_data.tel_perso}}"  type="tel" id="tel_perso" name="tel_perso" required>
+                </div>
+            </div>
+        </div>
+
+		<div class="row gutters">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<h6 class="mt-3 mb-2 text-primary">Informations Professionnelles</h6>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="nom">Téléphone Pro:</label>
+                    <input value="{{infirmier_data.tel_pro}}" class="form-control" type="tel" id="tel_pro" name="tel_pro" required>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="prenom">Identifiant Pro:</label>
+					<input value="{{infirmier_data.numero_pro}}" class="form-control" type="number" name="numero_pro" id="numero_pro" required>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row gutters">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<h6 class="mt-3 mb-2 text-primary">Addresse</h6>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="Street">Numéro de Voie :</label>
+					<input value="{{infirmier_data.numero}}" class="form-control" type="number" id="numero" name="numero" required>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="ciTy">Nom De la Voie :</label>
+					<input value="{{infirmier_data.rue}}" class="form-control" type="text" id="rue" name="rue" required>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="cp">Code Postal:</label>
+					<input value="{{infirmier_data.cp}}" class="form-control" type="number" id="cp" name="cp" required>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="ville">Ville</label>
+					<input value="{{infirmier_data.ville}}" class="form-control" type="text" id="ville" name="ville" required>
+				</div>
+			</div>
+		</div>
+		<div class="row gutters form-buttons">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                {% if context == "creation" %}
+				<div class="text-right">
+					<button type="button" id="cancel" name="cancel" class="btn btn-secondary">Annuler</button>
+					<button type="submit" name="valider" class="btn btn-primary">Valider</button>
+				</div>
+                {% endif %}
+
+                {% if context == "update" %}
+				<div class="text-right">
+					<button type="button" id="cancel" name="cancel" class="btn btn-secondary">Annuler</button>
+					<button type="submit" name="valider" class="btn btn-primary">Mettre à jour</button>
+				</div>
+                {% endif %}
+
+                {% if context == "detail" %}
+				<div class="text-right">
+					<button type="button" id="cancel" name="cancel" class="btn btn-danger">Supprimer</button>
+					<a href="/infirmier/update/{{infirmier_data.idinfirmier}}" class="btn btn-secondary" role="button">Modifier</a>
+				</div>
+                {% endif %}                
+			</div>
+		</div>
+
+        {% if context == "creation" or context == "update" %}
+        </form>
+        {% endif %}
+
+	</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock main %}

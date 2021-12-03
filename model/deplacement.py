@@ -93,11 +93,11 @@ class Deplacement(DB):
         return result
 
 
-depla = Deplacement(password="Onetipi4821!", port="3306", database="medical")
-data = {}
-data["patient_idpatient"] ="1"
-data["date"] = "2021-12-02"
-data["cout"] = "300€"
+# depla = Deplacement(password="Onetipi4821!", port="3306", database="medical")
+# data = {}
+# data["patient_idpatient"] ="1"
+# data["date"] = "2021-12-02"
+# data["cout"] = "300€"
 
-depla.add(data)
-print(depla)
+# depla.add(data)
+# print(depla)
