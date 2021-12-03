@@ -71,3 +71,21 @@ height: 100%;
 .form-buttons button{
     margin-right: 20px;
 }
+
+.fond{
+    background-image: url("/static/assets/img/accueil.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    margin-top: -2.5rem;
+}
+
+.welcome{
+    color:rgb(55, 27, 218);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 5rem;
+    font-size: 5rem;
+    padding-left: 2rem;
+
+}
