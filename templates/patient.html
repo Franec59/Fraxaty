@@ -118,7 +118,10 @@
                 <div class="form-group">
 					<label for="naissance">Référent:</label>
 					<select name="infirmier_idinfirmier" class="form-control">
-						<option value="7">FRANCOISE DUPONT - 000114444</option>
+						{% for infirmier in liste_infirmiers %}
+							<option value="{{infirmier.idinfirmier }}">{{infirmier.nom }} - {{infirmier.numero_pro }}</option>
+						{% endfor %}
+						
 					</select>
                 </div>
             </div>

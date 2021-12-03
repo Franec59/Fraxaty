@@ -84,13 +84,14 @@ class Patient(DB):
                     securite_sociale  = "{securite_sociale}"
                 
                 WHERE 
-                    idpatient = "{id}"
+                    idpatient = "{idpatient}"
                     
                 ;
         """).format(**data)
+        print(sql)
         cursor.execute(sql)
         cursor.close()
-        return infirmier_data.get("idpatient")
+        return data.get("idpatient")
 
     def delete(self, id_patient):
         cursor=self.getCursor()
