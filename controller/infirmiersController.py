@@ -14,11 +14,11 @@ class InfirmiersController():
         infirmier_data = InfirmierRepo().findById(id)
         return render_template("infirmier.html", infirmier_data=infirmier_data, context=context)
 
-    def traitement(context, data, id=None):
+    def traitement(context, data):
         if context == "creation" :
             infirmier_id = InfirmierRepo().add(data)
             
         elif context == "update" :
-            infirmier_id = InfirmierRepo().update(data, id)
+            infirmier_id = InfirmierRepo().update(data)
             
         return redirect(f'/infirmier/detail/{infirmier_id}')

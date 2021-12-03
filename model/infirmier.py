@@ -42,13 +42,13 @@ class Infirmier(DB):
         cursor.close()
         return cursor.lastrowid
    
-    
-    def update(self, infirmier_data, id_infirmier):
+    def update(self, infirmier_data, id_infirmier=None):
         infirmier_data = infirmier_data.to_dict()
+        print(infirmier_data)
         adresse=Adresse()
         adresse_idadresse=adresse.add(infirmier_data)
         infirmier_data["adresse_idadresse"]=adresse_idadresse
-        infirmier_data["idinfirmier"]=id_infirmier
+        # infirmier_data["idinfirmier"]=id_infirmier
         cursor=self.getCursor()
         sql2=("""
                 UPDATE 
@@ -69,9 +69,8 @@ class Infirmier(DB):
         print(sql2)
         cursor.execute(sql2)
         cursor.close()
-        return cursor.lastrowid
+        return infirmier_data.get("idinfirmier")
     
-
     def delete(self, id_infirmier):
         cursor=self.getCursor()
         sql3=(f"""

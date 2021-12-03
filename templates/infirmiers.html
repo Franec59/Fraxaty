@@ -32,7 +32,7 @@
 
                     <tbody>
                         {% for infirmier in liste_infirmiers %}
-                        {% set url = url_for('detailInfirmier', id = infirmier.idinfirmier) %}  
+                        {% set url = url_for('actionInfirmier', context="detail", id=infirmier.idinfirmier) %}  
                         <tr style="cursor: pointer;" onclick="document.location = '{{ url }}'">  
                             <td>{{ infirmier.nom }}</td> 
                             <td>{{ infirmier.prenom }}</td> 

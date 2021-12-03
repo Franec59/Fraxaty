@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from controller.infirmiersController import *
 
 
@@ -21,19 +21,17 @@ def creationInfirmier():
     return InfirmiersController.infirmier("creation")
 
 
-@app.route("/infirmier/detail/<int:id>", methods=['POST', 'GET'])
-def detailInfirmier(id):
-    return InfirmiersController.infirmier( "detail", id)
-
-
-@app.route("/infirmier/update/<int:id>", methods=['POST', 'GET'])
-def updateInfirmier(id):
-    return InfirmiersController.infirmier("update", id)
-
+@app.route("/infirmier/<context>/<int:id>", methods=['POST', 'GET'])
+def actionInfirmier(context, id):
+    if context in ["detail", "update", "delete"] :
+        return InfirmiersController.infirmier( context, id)
+    else:
+        abort(404)
 
 @app.route("/infirmier/traitement/<context>", methods=['POST', 'GET'])
 def traitementInfirmier(context):
     data = request.form
+    infirmier_id = request.args.get('id')
     return InfirmiersController.traitement(context, data)
 
 

@@ -3,6 +3,21 @@
 {% block styles %}
 {{ super ()}}
 
+<style>
+
+{% if context == "detail" %}
+
+.card-body input {
+    border : none;
+    text-transform: uppercase;
+    pointer-events:none;
+    font-weight:bold;
+    font-size:1.2em;
+}
+
+{% endif %}
+
+</style>
 
 
 {% endblock styles %}
@@ -11,10 +26,18 @@
 
 
 <div class="container-fluid px-4">
-<h1 class="mt-4">Détail Infirmier #20012</h1>
+{% if context == "detail" %}
+<h1 class="mt-4">Détail Infirmier #{{infirmier_data.numero_pro}}</h1>
+{% endif %}
+{% if context == "update" %}
+<h1 class="mt-4">Mise à jour Infirmier</h1>
+{% endif %}
+{% if context == "creation" %}
+<h1 class="mt-4">Création infirmier</h1>
+{% endif %}
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="/infimiers">Infirmiers</a></li>
+    <li class="breadcrumb-item"><a href="/infirmiers">Infirmiers</a></li>
     <li class="breadcrumb-item active">Détail infirmier</li>
 </ol>
 
@@ -60,6 +83,9 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <h6 class="mt-3 mb-2 text-primary">Informations personnelles</h6>
             </div>
+            {% if context == "update" %}
+                <input type="hidden" name="idinfirmier" value="{{infirmier_data.idinfirmier}}">
+            {% endif %}
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
                     <label for="nom">Nom de famille:</label>
