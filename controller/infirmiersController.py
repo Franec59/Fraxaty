@@ -14,7 +14,7 @@ class InfirmiersController():
         infirmier_data = InfirmierRepo().findById(id)
         return render_template("infirmier.html", infirmier_data=infirmier_data, context=context)
 
-    def traitement(context, data):
+    def traitement(context, data, id=None):
         if context == "creation" :
             infirmier_id = InfirmierRepo().add(data)
             

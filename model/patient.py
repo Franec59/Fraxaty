@@ -1,5 +1,5 @@
-from db import DB
-from adresse import Adresse
+from model.db import DB
+from model.adresse import Adresse
 
 class Patient(DB):
     def __init__(self, **kwargs):
@@ -9,6 +9,7 @@ class Patient(DB):
         cursor=self.getCursor()
         sql=("""
                 SELECT
+                    idpatient,
                     nom,
                     infirmier_idinfirmier,
                     prenom,
@@ -32,6 +33,7 @@ class Patient(DB):
 
     def add(self, data):
         adresse=Adresse()
+        data = data.to_dict()
         adresse_idadresse=adresse.add(data)
         data["adresse_idadresse"]=adresse_idadresse
         cursor=self.getCursor()
@@ -57,10 +59,14 @@ class Patient(DB):
                     );
                 """).format(**data)
         cursor.execute(sql)
+        print(sql)
         cursor.close()
+        return cursor.lastrowid
     
-    def update(self, data, id_patient):
+    
+    def update(self, data, id_patient=None):
         adresse=Adresse()
+        data = data.to_dict()
         adresse_idadresse=adresse.add(data)
         data["adresse_idadresse"]=adresse_idadresse
         data["id"]= id_patient
@@ -84,6 +90,7 @@ class Patient(DB):
         """).format(**data)
         cursor.execute(sql)
         cursor.close()
+        return infirmier_data.get("idpatient")
 
     def delete(self, id_patient):
         cursor=self.getCursor()
@@ -97,6 +104,7 @@ class Patient(DB):
         cursor=self.getCursor()            
         sql=(f"""
                 SELECT
+                    idpatient,
                     nom,
                     infirmier_idinfirmier,
                     prenom,
